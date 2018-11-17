@@ -1,5 +1,6 @@
 package com.github.binarywang.demo.wx.cp.controller;
 
+import com.github.binarywang.demo.wx.cp.dao.UserMapper;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpOAuth2ServiceImpl;
@@ -12,6 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,9 +31,13 @@ import java.util.Map;
 @Controller
 
 public class WxUserController {
-    @RequestMapping("/getCode")
-    public String getCode(HttpServletRequest request, HttpServletResponse response) {
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @RequestMapping("/getCode")
+    public Object getCode(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> retMap = new HashMap<String, Object>();
         String code = request.getParameter("code");
         System.out.println(code);
         WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
@@ -49,8 +55,10 @@ public class WxUserController {
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
+        retMap.put("userInfo",userMapper.selectAll());
         System.out.println(userId);
-        return "calendar";
+        return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
+//        return "calendar";
     }
 
     @RequestMapping("/getUser")
