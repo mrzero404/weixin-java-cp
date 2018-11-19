@@ -1,6 +1,7 @@
 package com.github.binarywang.demo.wx.cp.controller;
 
 import com.github.binarywang.demo.wx.cp.dao.UserMapper;
+import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpOAuth2ServiceImpl;
@@ -22,8 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
@@ -44,7 +46,9 @@ public class WxUserController {
         config.setCorpId("wx3b60be9f2027ddbc");      // 设置微信企业号的appid
         config.setCorpSecret("peKuqFiWVgr4y-0o4q1gEfY16U4xHhQF9WI5VznAfzM");  // 设置微信企业号的app corpSecret
         config.setAgentId(1000004);     // 设置微信企业号应用ID
-
+        if (null != code) {
+            return "calendar";
+        }
         WxCpServiceImpl wxCpService = new WxCpServiceImpl();
         wxCpService.setWxCpConfigStorage(config);
         String userId = null;
@@ -56,9 +60,31 @@ public class WxUserController {
             e.printStackTrace();
         }
         retMap.put("userInfo",userMapper.selectAll());
-        System.out.println(userId);
+//        retMap.put("checktime",userMapper.getChecktimeBySSN(userId));
+        retMap.put("checktime",userMapper.getChecktimeBySSN("13143385664"));
+        //
+        Format f = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        System.out.println("今天是:" + f.format(today));
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DAY_OF_MONTH, -1);// 今天+1天
+        Date tomorrow = c.getTime();
+        System.out.println("明天是:" + f.format(tomorrow));
+        //
+        CheckInOut checkInOut = new CheckInOut(tomorrow.getTime(),1);
+        CheckInOut checkInOut1 = new CheckInOut(new Date().getTime(),1);
+        List<CheckInOut> checkInOutList = new ArrayList<CheckInOut>();
+        checkInOutList.add(checkInOut);
+        checkInOutList.add(checkInOut1);
+        retMap.put("checkInOutList",checkInOutList);
+
         return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
-//        return "calendar";
+    }
+
+    @RequestMapping("/getPage")
+    public Object getPage(){
+        return "calendar";
     }
 
     @RequestMapping("/getUser")

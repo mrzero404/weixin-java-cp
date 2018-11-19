@@ -19,6 +19,8 @@
  * normal:1              //正常出勤状态值
  * };
  */
+
+
 function AttendanceCalendar(_obj, _fn, _lable) {
     var $elem;                          //日历父div
     var $content;                       //日历内容div
@@ -704,12 +706,30 @@ function getData(ym) {
 function getData2() {
     var attendances = [];
     var today = new Date();
-    attendances.push({datetime: today.clone().addDays(1).valueOf(), status: GetRandomNum(0, 2)});
-    attendances.push({datetime: today.clone().addDays(2).valueOf(), status: GetRandomNum(0, 2)});
-    attendances.push({datetime: today.clone().addDays(-5).valueOf(), status: GetRandomNum(0, 2)});
-    attendances.push({datetime: today.clone().addDays(-7).valueOf(), status: GetRandomNum(0, 2)});
-    attendances.push({datetime: today.clone().addDays(-11).valueOf(), status: GetRandomNum(0, 2)});
-    attendances.push({datetime: today.clone().addDays(-12).valueOf(), status: GetRandomNum(0, 2)});
+    // attendances.push({datetime: today.clone().addDays(1).valueOf(), status: GetRandomNum(0, 2)});
+    // attendances.push({datetime: today.clone().addDays(2).valueOf(), status: GetRandomNum(0, 2)});
+    // attendances.push({datetime: today.clone().addDays(-5).valueOf(), status: GetRandomNum(0, 2)});
+    // attendances.push({datetime: today.clone().addDays(-7).valueOf(), status: GetRandomNum(0, 2)});
+    // attendances.push({datetime: today.clone().addDays(-11).valueOf(), status: GetRandomNum(0, 2)});
+    // attendances.push({datetime: "2018-11-01", status: GetRandomNum(0, 2)});
+     $.ajax({
+        type:"GET",
+        url:"http://my-domain.tunnel.qydev.com/getCode",
+        async:false, 
+        dataType:"json",
+        contentType:"application/json",
+        success:function(data){
+            console.log(data);
+            console.log(data.checkInOutList);
+            console.log(data.checkInOutList[0]);
+            for (var i in data.checkInOutList) {
+                attendances.push(data.checkInOutList[i]);
+            }
+            
+        }
+    })
+    
+    console.log(attendances);
     return attendances;
 }
 
@@ -721,7 +741,16 @@ function GetRandomNum(Min, Max) {
 
 ac.setClickFn(clickFn);
 function clickFn(clickDate) {
-    alert(clickDate);
+    // alert(clickDate);
+    $.ajax({
+        type:"GET",
+        url:"http://my-domain.tunnel.qydev.com/getCode",
+        dataType:"json",
+        contentType:"application/json",
+        success:function(data){
+            alert(data);
+        }
+    })
 }
 /**** 此为测试js部分 测试日历  *****/
 // console.log(DayNumOfMonth(2016, 2));
