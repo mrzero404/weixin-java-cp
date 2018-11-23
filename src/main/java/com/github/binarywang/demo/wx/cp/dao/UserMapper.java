@@ -3,10 +3,12 @@ package com.github.binarywang.demo.wx.cp.dao;
 import com.github.binarywang.demo.wx.cp.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
+@Repository
 public interface UserMapper {
 
     @Select("select * from [dbo].[USERINFO]")

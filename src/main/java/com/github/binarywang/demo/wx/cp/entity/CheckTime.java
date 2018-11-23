@@ -1,27 +1,25 @@
 package com.github.binarywang.demo.wx.cp.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @author LinWeiYu
  * @date 2018/11/19 14:58
  */
 @Data
-public class CheckInOut {
+public class CheckTime {
 
 //    private int userId;
 
-    private String datatime;
+    private long datetime;
 
     private int status;
 
-//    public CheckInOut(String checkTime, int status) {
-//        this.checkTime = checkTime;
-//        this.status = status;
-//    }
+    public CheckTime(long datetime, int status) {
+        this.datetime = datetime;
+        this.status = status;
+    }
 
 //    public int getUserId() {
 //        return userId;

@@ -2,6 +2,8 @@ package com.github.binarywang.demo.wx.cp.controller;
 
 import com.github.binarywang.demo.wx.cp.dao.UserMapper;
 import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
+import com.github.binarywang.demo.wx.cp.entity.CheckTime;
+import com.github.binarywang.demo.wx.cp.service.CheckInOutService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpOAuth2ServiceImpl;
@@ -36,6 +38,12 @@ public class WxUserController {
 
     @Autowired
     private UserMapper userMapper;
+
+//    @Autowired
+//    private checkTimeMapper checkInOutMapper;
+
+    @Autowired
+    private CheckInOutService checkInOutService;
 
     @RequestMapping("/getCode")
     public Object getCode(HttpServletRequest request, HttpServletResponse response) {
@@ -72,9 +80,9 @@ public class WxUserController {
         Date tomorrow = c.getTime();
         System.out.println("明天是:" + f.format(tomorrow));
         //
-        CheckInOut checkInOut = new CheckInOut(tomorrow.getTime(),1);
-        CheckInOut checkInOut1 = new CheckInOut(new Date().getTime(),1);
-        List<CheckInOut> checkInOutList = new ArrayList<CheckInOut>();
+        CheckTime checkInOut = new CheckTime(tomorrow.getTime(),0);
+        CheckTime checkInOut1 = new CheckTime(new Date().getTime(),1);
+        List<CheckTime> checkInOutList = new ArrayList<CheckTime>();
         checkInOutList.add(checkInOut);
         checkInOutList.add(checkInOut1);
         retMap.put("checkInOutList",checkInOutList);
@@ -90,6 +98,15 @@ public class WxUserController {
     @RequestMapping("/getUser")
     void handleFoo(HttpServletResponse response) throws IOException {
         response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b60be9f2027ddbc&redirect_uri=http://my-domain.tunnel.qydev.com/getCode&response_type=code&scope=SCOPE&agentid=AGENTID&state=STATE");
+    }
+
+//    @RequestMapping("/getcheckTime")
+    @PostMapping(path = "/getCheckTime")
+    public Object getcheckTime(@RequestBody Map<String, String> map){
+        Map<String, Object> retMap = new HashMap<String, Object>();
+
+        retMap.put("checkInOutList",checkInOutService.getCheckTimeByMonth(map.get("SSN"),map.get("time")));
+        return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
     }
 
 //    @RequestMapping("/getUser")
