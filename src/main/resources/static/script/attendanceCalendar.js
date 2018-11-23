@@ -712,7 +712,7 @@ function getCheckTime(){
         url:"http://my-domain.tunnel.qydev.com/getCheckTime",
         async:false, 
         dataType:"json",
-        data:'{"SSN":"15811875181","time":"2018-11-"}',
+        data:'{"time":"2018-11-"}',
         contentType:"application/json",
         success:function(data){
             for (var i in data.checkInOutList) {

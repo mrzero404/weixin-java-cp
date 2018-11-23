@@ -42,12 +42,12 @@
 
 /** 缺勤 */
 .div_calendar span.normal {
-    color: #8ecda9;
+    color: #00ef66;
 }
 
 /** 缺勤 */
 .div_calendar span.absense {
-    color: #bfbfbf;
+    color: #f50000;
 }
 
 /** 当前日期 */

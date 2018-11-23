@@ -45,6 +45,8 @@ public class WxUserController {
     @Autowired
     private CheckInOutService checkInOutService;
 
+    private Map<String,String> userMap = new HashMap<String, String>();
+
     @RequestMapping("/getCode")
     public Object getCode(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> retMap = new HashMap<String, Object>();
@@ -54,9 +56,6 @@ public class WxUserController {
         config.setCorpId("wx3b60be9f2027ddbc");      // 设置微信企业号的appid
         config.setCorpSecret("peKuqFiWVgr4y-0o4q1gEfY16U4xHhQF9WI5VznAfzM");  // 设置微信企业号的app corpSecret
         config.setAgentId(1000004);     // 设置微信企业号应用ID
-        if (null != code) {
-            return "calendar";
-        }
         WxCpServiceImpl wxCpService = new WxCpServiceImpl();
         wxCpService.setWxCpConfigStorage(config);
         String userId = null;
@@ -64,30 +63,14 @@ public class WxUserController {
             String[] res = wxCpService.getOauth2Service().getUserInfo(code);
             userId = res[0];
             String deviceId = res[1];
+            String seeionId = request.getSession(true).getId();
+            System.out.println("seesion:"+seeionId);
+            userMap.put(seeionId,userId);
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
-        retMap.put("userInfo",userMapper.selectAll());
-//        retMap.put("checktime",userMapper.getChecktimeBySSN(userId));
-        retMap.put("checktime",userMapper.getChecktimeBySSN("13143385664"));
-        //
-        Format f = new SimpleDateFormat("yyyy-MM-dd");
-        Date today = new Date();
-        System.out.println("今天是:" + f.format(today));
-        Calendar c = Calendar.getInstance();
-        c.setTime(today);
-        c.add(Calendar.DAY_OF_MONTH, -1);// 今天+1天
-        Date tomorrow = c.getTime();
-        System.out.println("明天是:" + f.format(tomorrow));
-        //
-        CheckTime checkInOut = new CheckTime(tomorrow.getTime(),0);
-        CheckTime checkInOut1 = new CheckTime(new Date().getTime(),1);
-        List<CheckTime> checkInOutList = new ArrayList<CheckTime>();
-        checkInOutList.add(checkInOut);
-        checkInOutList.add(checkInOut1);
-        retMap.put("checkInOutList",checkInOutList);
 
-        return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
+        return "calendar";
     }
 
     @RequestMapping("/getPage")
@@ -96,16 +79,16 @@ public class WxUserController {
     }
 
     @RequestMapping("/getUser")
-    void handleFoo(HttpServletResponse response) throws IOException {
+    void handleFoo(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        String seeionId = request.getSession(true).getId();
         response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b60be9f2027ddbc&redirect_uri=http://my-domain.tunnel.qydev.com/getCode&response_type=code&scope=SCOPE&agentid=AGENTID&state=STATE");
     }
 
-//    @RequestMapping("/getcheckTime")
     @PostMapping(path = "/getCheckTime")
-    public Object getcheckTime(@RequestBody Map<String, String> map){
+    public Object getcheckTime(@RequestBody Map<String, String> map, HttpServletRequest request){
         Map<String, Object> retMap = new HashMap<String, Object>();
-
-        retMap.put("checkInOutList",checkInOutService.getCheckTimeByMonth(map.get("SSN"),map.get("time")));
+        String SSN = userMap.get(request.getSession(true).getId());
+        retMap.put("checkInOutList",checkInOutService.getCheckTimeByMonth(SSN,map.get("time")));
         return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
     }
 
