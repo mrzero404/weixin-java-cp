@@ -1,5 +1,6 @@
 package com.github.binarywang.demo.wx.cp.controller;
 
+import com.github.binarywang.demo.wx.cp.config.WxCpConfiguration;
 import com.github.binarywang.demo.wx.cp.dao.UserMapper;
 import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
 import com.github.binarywang.demo.wx.cp.entity.CheckTime;
@@ -8,6 +9,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpOAuth2ServiceImpl;
 import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
+import me.chanjar.weixin.cp.bean.WxCpUser;
 import me.chanjar.weixin.cp.config.WxCpInMemoryConfigStorage;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
@@ -51,25 +53,14 @@ public class WxUserController {
     public Object getCode(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> retMap = new HashMap<String, Object>();
         String code = request.getParameter("code");
-        System.out.println(code);
-        WxCpInMemoryConfigStorage config = new WxCpInMemoryConfigStorage();
-        config.setCorpId("wx3b60be9f2027ddbc");      // 设置微信企业号的appid
-        config.setCorpSecret("peKuqFiWVgr4y-0o4q1gEfY16U4xHhQF9WI5VznAfzM");  // 设置微信企业号的app corpSecret
-        config.setAgentId(1000004);     // 设置微信企业号应用ID
-        WxCpServiceImpl wxCpService = new WxCpServiceImpl();
-        wxCpService.setWxCpConfigStorage(config);
-        String userId = null;
+        WxCpService wxCpService = WxCpConfiguration.getCpServices().get(1000004);
         try {
             String[] res = wxCpService.getOauth2Service().getUserInfo(code);
-            userId = res[0];
-            String deviceId = res[1];
-            String seeionId = request.getSession(true).getId();
-            System.out.println("seesion:"+seeionId);
-            userMap.put(seeionId,userId);
+            WxCpUser user = wxCpService.getUserService().getById(res[0]);
+            userMap.put(request.getSession(true).getId(),user.getMobile());
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
-
         return "calendar";
     }
 
@@ -92,6 +83,14 @@ public class WxUserController {
         return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
     }
 
+    @PostMapping(path = "/getCheckTimeByDay")
+    public Object getCheckTimeByDay(@RequestBody Map<String, String> map, HttpServletRequest request){
+        Map<String, Object> retMap = new HashMap<String, Object>();
+        String SSN = userMap.get(request.getSession(true).getId());
+        System.out.println("**************************"+map.get("time"));
+        retMap.put("checkInOutList",checkInOutService.getCheckTimeByMonth(SSN,map.get("time")));
+        return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
+    }
 //    @RequestMapping("/getUser")
 //    public String getUser() {
 //        WxCpOAuth2ServiceImpl oAuth2Service = new WxCpOAuth2ServiceImpl(new WxCpServiceImpl());

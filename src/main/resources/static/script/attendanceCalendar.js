@@ -706,7 +706,6 @@ function getData(ym) {
 
 function getCheckTime(){
     var attendances = [];
-    // attendances.push({datetime: 1541300249000, status: GetRandomNum(1,1)});
     $.ajax({
         type:"POST",
         url:"http://my-domain.tunnel.qydev.com/getCheckTime",
@@ -724,53 +723,6 @@ function getCheckTime(){
     return attendances;
 }
 
-function getData2() {
-    var attendances = getCheckTime();
-    var today = new Date();
-    console.log(1);
-     
-    // attendances.push({datetime: today.clone().addDays(1).valueOf(), status: GetRandomNum(0, 2)});
-    attendances.push({datetime: 1541300249000, status: GetRandomNum(1,1)});
-    attendances.push({datetime: 1542846561535, status: GetRandomNum(1,1)});
-    // attendances.push({datetime: today.clone().addDays(-5).valueOf(), status: GetRandomNum(0, 2)});
-    // attendances.push({datetime: today.clone().addDays(-7).valueOf(), status: GetRandomNum(0, 2)});
-    // attendances.push({datetime: today.clone().addDays(-11).valueOf(), status: GetRandomNum(0, 2)});
-    // attendances.push({datetime: "2018-11-01", status: GetRandomNum(0, 0)});
-    // var data = {"SSN":'13143385664',"time":'2018-11-'}
-    //  $.ajax({
-    //     type:"GET",
-    //     async:false, 
-    //     url:"http://127.0.0.1:8080/getCode",
-    //     //my-domain.tunnel.qydev.com
-    //     //127.0.0.1:8080
-        
-    //     // data:JSON.stringify(data),
-    //     // data:'{"SSN":"15811875181","time":"2018-11-"}',
-    //     dataType:"json",
-    //     contentType:"application/json",
-    //     success:function(data){
-    //         // console.log(data);
-    //         // console.log(data.checkInOutList);
-    //         // console.log(data.checkInOutList[0]);
-    //         for (var i in data.checkInOutList) {
-    //             // data.checkInOutList[i]["datetime"] = Number(data.checkInOutList[i]["datetime"]);
-    //             console.log(2);
-
-    //             attendances.push(data.checkInOutList[i]);
-    //         }
-            
-    //     }
-    // })
-
-    // console.log(3);
-    // console.log(attendances);
-    // for (var i in attendances) {
-    //             // attendances.push(data.checkInOutList[i]);
-    //             console.log(typeof attendances[i]);
-    //         }
-    return attendances;
-}
-
 function GetRandomNum(Min, Max) {
     var Range = Max - Min;
     var Rand = Math.random();
@@ -779,6 +731,19 @@ function GetRandomNum(Min, Max) {
 
 ac.setClickFn(clickFn);
 function clickFn(clickDate) {
+    $.ajax({
+        type:"POST",
+        url:"http://my-domain.tunnel.qydev.com/getCheckTimeByDay",
+        async:false, 
+        dataType:"json",
+        data:{time:clickDate},
+        contentType:"application/json",
+        success:function(data){
+            for (var i in data.checkInOutList) {
+                attendances.push(data.checkInOutList[i]);
+            }
+        }
+    })
 }
 /**** 此为测试js部分 测试日历  *****/
 // console.log(DayNumOfMonth(2016, 2));
