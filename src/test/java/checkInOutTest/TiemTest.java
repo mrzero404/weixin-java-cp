@@ -41,7 +41,8 @@ public class TiemTest {
         System.out.println("2018-11-05 08:12:58.0".substring(0,10));
         System.out.println(TimeHandle.timeDifference("08:20:00","08:35:00"));
         System.out.println(TimeHandle.timeDifference("2018-11-20 08:20:00","2018-11-20 08:35:00"));
-//        System.out.println(TimeHandle.timeDifference("2018-11-20 08:20:00","08:35:00"));  //发生错误
+        System.out.println(TimeHandle.timeDifference("18:00:00","18:01:00"));
+        System.out.println(TimeHandle.timeDifference("18:00:00","17:01:00"));
     }
 
 }

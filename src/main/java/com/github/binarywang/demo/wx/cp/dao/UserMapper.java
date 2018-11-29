@@ -14,7 +14,6 @@ public interface UserMapper {
     @Select("select * from [dbo].[USERINFO]")
     List<UserInfo> selectAll();
 
-
     @Select("SELECT\n" +
         "dbo.CHECKINOUT.CHECKTIME\n" +
         "FROM\n" +

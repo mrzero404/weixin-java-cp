@@ -72,7 +72,7 @@ public class WxUserController {
     @RequestMapping("/getUser")
     void handleFoo(HttpServletResponse response, HttpServletRequest request) throws IOException {
         String seeionId = request.getSession(true).getId();
-        response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b60be9f2027ddbc&redirect_uri=http://my-domain.tunnel.qydev.com/getCode&response_type=code&scope=SCOPE&agentid=AGENTID&state=STATE");
+        response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b60be9f2027ddbc&redirect_uri=http://mrzero.tunnel.qydev.com/getCode&response_type=code&scope=SCOPE&agentid=AGENTID&state=STATE");
     }
 
     @PostMapping(path = "/getCheckTime")

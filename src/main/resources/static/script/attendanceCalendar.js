@@ -708,7 +708,7 @@ function getCheckTime(){
     var attendances = [];
     $.ajax({
         type:"POST",
-        url:"http://my-domain.tunnel.qydev.com/getCheckTime",
+        url:"http://mrzero.tunnel.qydev.com/getCheckTime",
         async:false, 
         dataType:"json",
         data:'{"time":"2018-11-"}',
@@ -733,7 +733,7 @@ ac.setClickFn(clickFn);
 function clickFn(clickDate) {
     $.ajax({
         type:"POST",
-        url:"http://my-domain.tunnel.qydev.com/getCheckTimeByDay",
+        url:"http://mrzero.tunnel.qydev.com/getCheckTimeByDay",
         async:false, 
         dataType:"json",
         data:{time:clickDate},

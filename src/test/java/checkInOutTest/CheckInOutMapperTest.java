@@ -2,6 +2,7 @@ package checkInOutTest;
 
 import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
 import com.github.binarywang.demo.wx.cp.dao.CheckInOutMapper;
+import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
 import com.github.binarywang.demo.wx.cp.service.CheckInOutService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author LinWeiYu
@@ -26,7 +28,14 @@ public class CheckInOutMapperTest {
 //        Assert.assertEquals(15,checkInOutService.judgeState("2018-11-20 08:15:00","2018-11-20 08:30:00"));
 //        System.out.println(checkInOutService.judgeState("2018-11-20 08:35:00","2018-11-20 08:30:00"));
 //        checkInOutMapper.getChecktimeBySSN("13143385664","2018-11-");
-        checkInOutMapper.getChecktimeBySSN("13143385664","2018-11-");
+        List<CheckInOut> minCheckInOutList = checkInOutMapper.getMinChecktimeBySSN("13143385664","2018-11-");
+        List<CheckInOut> maxCheckInOutList = checkInOutMapper.getMaxChecktimeBySSN("13143385664","2018-11-");
+        int index = 0;
+        for(CheckInOut checkInOut : minCheckInOutList) {
+            System.out.println("上班时间" + checkInOut.getDatatime());
+            System.out.println("下班时间" + maxCheckInOutList.get(index).getDatatime());
+            index ++;
+        }
 
     }
 }

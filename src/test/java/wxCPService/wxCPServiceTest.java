@@ -10,6 +10,7 @@ import me.chanjar.weixin.cp.api.WxCpDepartmentService;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpDepartmentServiceImpl;
 import me.chanjar.weixin.cp.bean.WxCpDepart;
+import me.chanjar.weixin.cp.bean.WxCpMessage;
 import me.chanjar.weixin.cp.bean.WxCpUser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -48,15 +49,26 @@ public class wxCPServiceTest {
         }
     }
 
+    //部门信息测试
     @Test
     public void department() {
         WxCpService wxCpService = WxCpConfiguration.getCpServices().get(3010011);
         try {
             System.out.println(wxCpService.post("https://qyapi.weixin.qq.com/cgi-bin/checkin/getcheckinoption","13143385664"));
-
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
     }
 
+    //消息推送测试
+    @Test
+    public void message() {
+        WxCpService wxCpService = WxCpConfiguration.getCpServices().get(1000004);
+        WxCpMessage wxCpMessage = WxCpMessage.TEXT().agentId(1000004).toUser("13143385664").content("test").build();
+        try {
+            wxCpService.messageSend(wxCpMessage);
+        } catch (WxErrorException e) {
+            e.printStackTrace();
+        }
+    }
 }

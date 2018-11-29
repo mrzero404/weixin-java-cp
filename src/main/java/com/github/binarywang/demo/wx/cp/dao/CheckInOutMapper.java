@@ -28,7 +28,20 @@ public interface CheckInOutMapper {
         "CONVERT(VARCHAR(25), CHECKTIME, 126) LIKE CONCAT(#{time}, '%')" +
         "GROUP BY\n" +
         "CONVERT(VARCHAR(10), CHECKTIME, 120)")
-    List<CheckInOut> getChecktimeBySSN(@Param("SSN") String SSN,@Param("time" )String time);
+    List<CheckInOut> getMinChecktimeBySSN(@Param("SSN") String SSN,@Param("time" )String time);
+
+    @Select("SELECT\n" +
+        "MAX(dbo.CHECKINOUT.CHECKTIME)as datatime\n" +
+        "FROM\n" +
+        "dbo.USERINFO ,\n" +
+        "dbo.CHECKINOUT\n" +
+        "WHERE\n" +
+        "dbo.USERINFO.USERID = dbo.CHECKINOUT.USERID AND\n" +
+        "dbo.USERINFO.SSN = #{SSN} AND\n" +
+        "CONVERT(VARCHAR(25), CHECKTIME, 126) LIKE CONCAT(#{time}, '%')" +
+        "GROUP BY\n" +
+        "CONVERT(VARCHAR(10), CHECKTIME, 120)")
+    List<CheckInOut> getMaxChecktimeBySSN(@Param("SSN") String SSN,@Param("time" )String time);
 
     @Select("SELECT\n" +
         "dbo.CHECKINOUT.USERID,\n" +
