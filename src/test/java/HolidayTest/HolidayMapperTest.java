@@ -27,18 +27,25 @@ public class HolidayMapperTest {
     private HolidayMapper holidayMapper;
 
     @Test
-    public void testJudgeStatus(){
+    public void insertBatchHoliday(){
         int index = 0;
-        for (int i=1; i<=12; i++) {
-            List list = DateTest.getWeekendInMonth(2018, i);
-            List<Holiday> holidayList = new ArrayList<Holiday>();
-            for (Object s : list) {
-                index++;
-                Holiday holiday = new Holiday(index,s.toString(),0);
-                holidayList.add(holiday);
-            }
-            holidayMapper.insertBatchHoliday(holidayList);
-        }
+//        for (int i=1; i<=12; i++) {
+//            List list = DateTest.getWeekendInMonth(2018, i);
+//            List<Holiday> holidayList = new ArrayList<Holiday>();
+//            for (Object s : list) {
+//                index++;
+//                Holiday holiday = new Holiday(index,s.toString(),0);
+//                holidayList.add(holiday);
+//            }
+//            holidayMapper.insertBatchHoliday(holidayList);
+//        }
+    }
 
+    @Test
+    public void getHolidayByMonth() {
+        List<String> holidayList = holidayMapper.getHolidayByMonth("2018-10");
+        for (String holiday : holidayList) {
+            System.out.println(holiday);
+        }
     }
 }

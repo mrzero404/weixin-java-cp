@@ -43,6 +43,11 @@ public interface CheckInOutMapper {
         "CONVERT(VARCHAR(10), CHECKTIME, 120)")
     List<CheckInOut> getMaxChecktimeBySSN(@Param("SSN") String SSN,@Param("time" )String time);
 
+    /**
+     * 获取一个月中的
+     * @param time
+     * @return
+     */
     @Select("SELECT\n" +
         "dbo.CHECKINOUT.USERID,\n" +
         "min(dbo.CHECKINOUT.CHECKTIME)as checkTime\n" +

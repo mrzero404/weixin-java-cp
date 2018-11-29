@@ -75,11 +75,19 @@ public class WxUserController {
         response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3b60be9f2027ddbc&redirect_uri=http://mrzero.tunnel.qydev.com/getCode&response_type=code&scope=SCOPE&agentid=AGENTID&state=STATE");
     }
 
+    /**
+     * 获取一个月的状态
+     * @param map
+     * @param request
+     * @return
+     */
     @PostMapping(path = "/getCheckTime")
     public Object getcheckTime(@RequestBody Map<String, String> map, HttpServletRequest request){
         Map<String, Object> retMap = new HashMap<String, Object>();
-        String SSN = userMap.get(request.getSession(true).getId());
+//        String SSN = userMap.get(request.getSession(true).getId());
+        String SSN = "13143385664";
         retMap.put("checkInOutList",checkInOutService.getCheckTimeByMonth(SSN,map.get("time")));
+        retMap.put("unusualList",checkInOutService.getUnusual(SSN,map.get("time")));
         return new ResponseEntity<Map<String, Object>>(retMap,HttpStatus.OK);
     }
 

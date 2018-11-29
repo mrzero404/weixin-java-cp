@@ -22,7 +22,6 @@ public interface HolidayMapper {
         "VALUES"+
             "<foreach item='item' index='index' collection='list'  separator=','>" +
                 "(" +
-
                     "#{item.id},",
                     "#{item.holiday},",
                     "#{item.isWork}"+
@@ -33,13 +32,10 @@ public interface HolidayMapper {
     void insertBatchHoliday( List<Holiday> array);
 
     @Select("SELECT\n" +
-        "dbo.CHECKINOUT.CHECKTIME\n" +
+        "dbo.holiday.holiday\n" +
         "FROM\n" +
-        "dbo.USERINFO ,\n" +
-        "dbo.CHECKINOUT\n" +
+        "dbo.holiday\n" +
         "WHERE\n" +
-        "dbo.USERINFO.USERID = dbo.CHECKINOUT.USERID AND\n" +
-        "dbo.USERINFO.SSN = #{SSN} AND\n" +
-        "CONVERT(VARCHAR(25), CHECKTIME, 126) LIKE '%2018-11-%'")
-    List<String> getChecktimeBySSN(String SSN);
+        "dbo.holiday.holiday LIKE CONCAT(#{month}, '-%')\n")
+    List<String> getHolidayByMonth(String month);
 }
