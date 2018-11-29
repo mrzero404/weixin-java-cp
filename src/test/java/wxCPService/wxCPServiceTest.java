@@ -3,6 +3,8 @@ package wxCPService;
 import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
 import com.github.binarywang.demo.wx.cp.config.WxCpConfiguration;
 import com.github.binarywang.demo.wx.cp.constant.Status;
+import com.github.binarywang.demo.wx.cp.dao.DepartmentMapper;
+import com.github.binarywang.demo.wx.cp.entity.Department;
 import com.github.binarywang.demo.wx.cp.service.CheckInOutService;
 import com.github.binarywang.demo.wx.cp.utils.TimeHandle;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -32,8 +34,11 @@ public class wxCPServiceTest {
     @Resource
     private CheckInOutService  checkInOutService;
 
+    @Resource
+    private DepartmentMapper departmentMapper;
 
 
+    //递归获取部门上下班时间
     @Test
     public void testJudgeStatus(){
         try {
@@ -41,11 +46,22 @@ public class wxCPServiceTest {
             WxCpUser user = wxCpService.getUserService().getById("13143385664");
             System.out.println(user.getMobile());
             System.out.println(user.getDepartIds()[0]);
-            WxCpDepartmentService wxCpDepartmentService = wxCpService.getDepartmentService();
-            List<WxCpDepart> departList = wxCpDepartmentService.list(1);
-            System.out.println(departList.get(0).getName());
+            Department department = getParentId(user.getDepartIds()[0]);
+            System.out.println(department.getWorkingHour());
         } catch (WxErrorException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Department getParentId(int parentId) throws WxErrorException {
+        WxCpService wxCpService = WxCpConfiguration.getCpServices().get(1000002);
+        WxCpDepartmentService wxCpDepartmentService = wxCpService.getDepartmentService();
+        List<WxCpDepart> departList = wxCpDepartmentService.list(parentId);
+        if (departList.get(0).getParentId()==200001000) {
+            return departmentMapper.getWorkingHourByDepartment(departList.get(0).getId());
+        } else {
+            System.out.println("部门:"+departList.get(0).getName());
+            return getParentId(departList.get(0).getParentId());
         }
     }
 
