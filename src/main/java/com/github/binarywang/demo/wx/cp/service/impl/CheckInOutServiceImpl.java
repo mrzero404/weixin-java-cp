@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,55 +39,104 @@ public class CheckInOutServiceImpl implements CheckInOutService {
     @Autowired
     private DepartmentService departmentService;
 
+    /**
+     * 获取一个月中有打卡数据的状态
+     * @param SSN
+     * @param time
+     * @return
+     */
     public List<CheckTime> getCheckTimeByMonth(String SSN, String time){
-       Department department = departmentService.getWorkingHour(SSN);
-       List<CheckInOut> minCheckInOutList = checkInOutMapper.getMinChecktimeBySSN(SSN,time);
-       List<CheckInOut> maxCheckInOutList = checkInOutMapper.getMaxChecktimeBySSN(SSN,time);
-       List<CheckTime> checkTimeList = new ArrayList<CheckTime>();
-       int index = 0;
-       for(CheckInOut checkInOut : minCheckInOutList) {
-           //根据计算得出的时间差值判断是否迟到并设置状态 0为正常 1为异常
-           int late =
-               TimeHandle.judgeStatus(
-                   TimeHandle.timeDifference(
-                       checkInOut.getDatatime().substring(11,19),department.getWorkingHour())).getStatus()> Status.Normally.getStatus() ? 1 : 0;
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        //当天日期
+        int today = calendar.get(Calendar.DATE);
+        Department department = departmentService.getWorkingHour(SSN);
+        List<CheckInOut> minCheckInOutList = checkInOutMapper.getMinChecktimeBySSN(SSN,time);
+        List<CheckInOut> maxCheckInOutList = checkInOutMapper.getMaxChecktimeBySSN(SSN,time);
+        List<CheckTime> checkTimeList = new ArrayList<CheckTime>();
+        //获取用户所在部门的迟到起算时间
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String lateTime = department.getWorkingHour();
+        Date date = null;
+        try {
+            date = sdf.parse(lateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //在工作时间上加5分钟
+        lateTime = sdf.format(date.getTime()+300000);
+        int index = 0;
+        //处理当天日期没数据的情况
+        List<CheckInOut> checkInOutList = checkInOutMapper.getChecktimeByDate(SSN, format.format(new Date()).substring(0,10));
+        if (TimeHandle.timeDifference(format.format(new Date()).substring(11,19),lateTime)<-30 && checkInOutList.size() == 0){
+            checkTimeList.add(new CheckTime(new Date().getTime(),0));
+        }
+        //处理有数据的情况
+        for(CheckInOut checkInOut : minCheckInOutList) {
+            //根据计算得出的时间差值判断是否迟到并设置状态 0为正常 1为异常
+            int late =
+                TimeHandle.judgeStatus(
+                    TimeHandle.timeDifference(
+                        checkInOut.getDatatime().substring(11,19),lateTime)).getStatus()> Status.Normally.getStatus() ? 1 : 0;
 
-           //根据计算得出的时间差值判断是否早退并设置状态
-           //非负数为正常下班把值设为0，负数为早退把值设为1
-           int leaveEearly = TimeHandle.timeDifference(department.getOffWorkingHours(),maxCheckInOutList.get(index).getDatatime().substring(11,19)) >= 0 ? 0 : 1;
-           index ++;
-           try {
-               SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-               long datatime = format.parse(checkInOut.getDatatime()).getTime();
-               //0为异常，1为正常
-               checkTimeList.add(new CheckTime(datatime,late + leaveEearly > 0 ? 0 : 1));
-           } catch (ParseException e) {
-               e.printStackTrace();
-           }
-       }
-       return checkTimeList;
+            //根据计算得出的时间差值判断是否早退并设置状态
+            //非负数为正常下班把值设为0，负数为早退把值设为1
+            int leaveEearly = TimeHandle.timeDifference(department.getOffWorkingHours(),maxCheckInOutList.get(index).getDatatime().substring(11,19)) >= 0 ? 0 : 1;
+            index ++;
+            try {
+                long datatime = format.parse(checkInOut.getDatatime()).getTime();
+                //这里0为异常，1为正常（注意与上面区分开来）
+                if (Integer.valueOf(checkInOut.getDatatime().substring(8,10)) == today ){
+                    if (late == 1) {
+                        checkTimeList.add(new CheckTime(datatime,0));
+                    } else if (late == 0 && leaveEearly == 0) {
+                        checkTimeList.add(new CheckTime(datatime,1));
+                    }
+                } else {
+                    checkTimeList.add(new CheckTime(datatime,late + leaveEearly > 0 ? 0 : 1));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return checkTimeList;
     }
 
+    /**
+     * 获取一个月中的异常状态
+     * @param SSN
+     * @param yearMomth
+     * @return
+     */
     public List<CheckTime> getUnusual(String SSN, String yearMomth) {
         Calendar calendar = Calendar.getInstance();
+        int today = calendar.get(Calendar.DATE);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
         try {
             calendar.setTime(sdf.parse(yearMomth));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //将没有到来的日期标记为正常状态
         int[] total = new int[calendar.getActualMaximum(Calendar.DAY_OF_MONTH)];
+        for (int i=today-1; i<total.length; i++){
+            total[i] = total[i] + 1;
+        }
+        //获取当月假期
         List<String> holidayList = holidayMapper.getHolidayByMonth(yearMomth);
         for (String holiday : holidayList) {
             String day = holiday.substring(8,10);
-            int index = 0;
-            if (day.charAt(0)=='0'){
-                index = Integer.valueOf(holiday.substring(9,10))-1;
-            } else {
-                index = Integer.valueOf(holiday.substring(8,10))-1;
+            if (Integer.valueOf(day)<=today){
+                int index = 0;
+                if (day.charAt(0)=='0'){
+                    index = Integer.valueOf(holiday.substring(9,10))-1;
+                } else {
+                    index = Integer.valueOf(holiday.substring(8,10))-1;
+                }
+                total[index]= total[index]+1;
             }
-            total[index]= total[index]+1;
         }
+        //获取有打卡数据的日期
         List<CheckInOut> checkInOutList = checkInOutMapper.getMinChecktimeBySSN(SSN,yearMomth);
         for (CheckInOut checkInOut : checkInOutList) {
             String day = checkInOut.getDatatime().substring(8,10);
@@ -98,6 +148,7 @@ public class CheckInOutServiceImpl implements CheckInOutService {
             }
             total[index]= total[index]+1;
         }
+        //挑出异常日期添加到数组
         List<CheckTime> checkTimeList = new ArrayList<CheckTime>();
         int index = 0;
         for (int day : total) {
@@ -122,7 +173,6 @@ public class CheckInOutServiceImpl implements CheckInOutService {
                 e.printStackTrace();
             }
         }
-
         return checkTimeList;
     }
 

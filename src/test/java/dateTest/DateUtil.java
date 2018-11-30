@@ -6,6 +6,8 @@ import com.github.binarywang.demo.wx.cp.dao.HolidayMapper;
 import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -14,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +26,8 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WxCpDemoApplication.class)
 public class DateUtil {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private HolidayMapper holidayMapper;
@@ -86,6 +91,7 @@ public class DateUtil {
     @Test
     public void getMonthDay() {
         Calendar calendar = Calendar.getInstance();
+        System.out.println(String.valueOf(calendar.get(Calendar.DATE)));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
         try {
             calendar.setTime(sdf.parse("2018-11"));
@@ -93,12 +99,13 @@ public class DateUtil {
             e.printStackTrace();
         }
         System.out.println(calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+
     }
 
     @Test
     public void format() throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        format.parse("2018-11-01");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");//设置日期格式
+        System.out.println("时间："+df.format(new Date()).substring(0,10));// new Date()为获取当前系统时间
     }
 
 }

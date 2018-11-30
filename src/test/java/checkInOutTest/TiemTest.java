@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author LinWeiYu
@@ -38,7 +40,11 @@ public class TiemTest {
 
     @Test
     public void testTimeDifference() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        System.out.println(TimeHandle.timeDifference(format.format(new Date()).substring(11,19),"08:30:00"));
+
         System.out.println("2018-11-05 08:12:58.0".substring(0,10));
+
         System.out.println(TimeHandle.timeDifference("08:20:00","08:35:00"));
         System.out.println(TimeHandle.timeDifference("2018-11-20 08:20:00","2018-11-20 08:35:00"));
         System.out.println(TimeHandle.timeDifference("18:00:00","18:01:00"));

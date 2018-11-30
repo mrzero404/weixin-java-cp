@@ -36,6 +36,27 @@ public class CheckInOutMapperTest {
             System.out.println("下班时间" + maxCheckInOutList.get(index).getDatatime());
             index ++;
         }
+    }
 
+    /**
+     * 查询单个用户某一天/月/年的打卡时间
+     */
+    @Test
+    public void getChecktimeByDate(){
+        //一天
+        List<CheckInOut> checkInOutByDayList = checkInOutMapper.getChecktimeByDate("13143385664","2018-11-01");
+        for (CheckInOut checkInOut : checkInOutByDayList) {
+            System.out.println(checkInOut.getDatatime());
+        }
+        //一月
+        List<CheckInOut> checkInOutByMonthList = checkInOutMapper.getChecktimeByDate("13143385664","2018-11");
+        for (CheckInOut checkInOut : checkInOutByMonthList) {
+            System.out.println(checkInOut.getDatatime());
+        }
+        //一年
+        List<CheckInOut> checkInOutByYearList = checkInOutMapper.getChecktimeByDate("13143385664","2018");
+        for (CheckInOut checkInOut : checkInOutByYearList) {
+            System.out.println(checkInOut.getDatatime());
+        }
     }
 }

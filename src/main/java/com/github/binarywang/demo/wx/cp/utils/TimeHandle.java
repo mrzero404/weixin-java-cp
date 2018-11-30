@@ -31,24 +31,6 @@ public class TimeHandle {
         return 0;
     }
 
-//    public static long  dateTimeDifference(String checkTime, String workingHour) {
-////        System.out.println("签到时间" + checkTime);
-////        System.out.println("上班时间" + workingHour);
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        try {
-//            Date date1 = df.parse(workingHour);
-//            Date date2 = df.parse(checkTime);
-//            long diff = date1.getTime() - date2.getTime();
-////            System.out.println("毫秒数：" + diff);
-//            //计算两个时间之间差了多少分钟
-//            long minutes = diff / (1000 * 60);
-//            return minutes;
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return 0;
-//    }
 
     public static Status judgeStatus(Long timeDifference) {
         Status status = Status.Normally;
