@@ -52,12 +52,16 @@ public interface HolidayMapper {
      * @param month
      * @return
      */
-    @Select("SELECT\n" +
-        "dbo.holiday.holiday\n" +
+    @Select(
+        "SELECT\n" +
+            "dbo.holiday.holiday\n" +
         "FROM\n" +
-        "dbo.holiday\n" +
+            "dbo.holiday\n" +
         "WHERE\n" +
-        "dbo.holiday.holiday LIKE CONCAT(#{month}, '-%')\n")
+            "dbo.holiday.holiday LIKE CONCAT(#{month}, '-%')\n"+
+            "AND "+
+            "is_work = 0"
+    )
     List<String> getHolidayByMonth(String month);
 
     /**

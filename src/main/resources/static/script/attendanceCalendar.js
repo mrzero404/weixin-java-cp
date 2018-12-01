@@ -711,7 +711,7 @@ function getCheckTime(){
         url:"http://mrzero.tunnel.qydev.com/getCheckTime",
         async:false, 
         dataType:"json",
-        data:'{"time":"2018-11"}',
+        data:'{"time":"2018-12"}',
         contentType:"application/json",
         success:function(data){
             for (var i in data.checkInOutList) {

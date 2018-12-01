@@ -86,7 +86,11 @@ public class CheckInOutServiceImpl implements CheckInOutService {
             try {
                 long datatime = format.parse(checkInOut.getDatatime()).getTime();
                 //这里0为异常，1为正常（注意与上面区分开来）
+                //判断是否当天是否有打卡数据，这里要做特殊处理与过去有完整一天的数据区分开来
                 if (Integer.valueOf(checkInOut.getDatatime().substring(8,10)) == today ){
+                    //只要早上迟到或旷工这一天就是异常状态
+                    //如早上打卡正常到下班打卡中间这段时间为无状态
+                    //到下班时间之后打卡判定这一天为正常状态
                     if (late == 1) {
                         checkTimeList.add(new CheckTime(datatime,0));
                     } else if (late == 0 && leaveEearly == 0) {
@@ -109,6 +113,14 @@ public class CheckInOutServiceImpl implements CheckInOutService {
      * @return
      */
     public List<CheckTime> getUnusual(String SSN, String yearMomth) {
+        /**
+         * 利用桶排序的思想
+         * 一个月中有多少天就有多少个桶，把上班（有打卡数据），假期（周末、节假日、请假、调休）的日期放入对应的天数
+         * 值为0表示既不是假期又没有上班（没有打卡数据），为异常状态（旷工、没带卡、打卡异常）
+         * 值为1的桶有两种情况——上班或假期，为正常状态
+         * 值为2表示既是假期又来上班，为加班状态（这里后边要考虑申请请假、调休后来上班的情况）
+         */
+        //获取当月天数
         Calendar calendar = Calendar.getInstance();
         int today = calendar.get(Calendar.DATE);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
