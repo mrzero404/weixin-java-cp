@@ -13,7 +13,7 @@ public interface DepartmentService {
      * @param SSN
      * @return
      */
-    Department getWorkingHour(String SSN);
+    Department getDepartmentBySSN(String SSN);
 
 
 }

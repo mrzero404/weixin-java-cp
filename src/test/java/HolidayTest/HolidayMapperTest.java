@@ -60,7 +60,7 @@ public class HolidayMapperTest {
      */
     @Test
     public void getHolidayByMonth() {
-        List<String> holidayList = holidayMapper.getHolidayByMonth("2018-10");
+        List<String> holidayList = holidayMapper.getHolidayByMonth("2018-10",0);
         for (String holiday : holidayList) {
             System.out.println(holiday);
         }

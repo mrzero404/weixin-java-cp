@@ -50,17 +50,19 @@ public interface HolidayMapper {
      * @param month
      * @return
      */
-    @Select(
-        "SELECT\n" +
-            "dbo.holiday.holiday\n" +
-        "FROM\n" +
-            "dbo.holiday\n" +
-        "WHERE\n" +
-            "dbo.holiday.holiday LIKE CONCAT(#{month}, '-%')\n"+
-            "AND "+
-            "is_work = 0"
-    )
-    List<String> getHolidayByMonth(String month);
+    @Select({
+        "<script>",
+            "SELECT holiday",
+            "FROM" ,
+            "holiday" ,
+            "WHERE" ,
+            "holiday LIKE CONCAT(#{month}, '-%')" ,
+            "AND " ,
+            "is_work = 0" +
+            "<if test=' isWeek == 1'> AND is_week != 1 </if> ",
+        "</script>"
+    })
+    List<String> getHolidayByMonth(@Param("month") String month, @Param("isWeek") int isWeek);
 
     /**
      * 查询是否与周末表的数据重合
@@ -80,16 +82,18 @@ public interface HolidayMapper {
      * @param holiday
      * @return
      */
-    @Update({"<script>",
-        "UPDATE holiday",
-        "<set>",
-            "<if test='holiday != null'> holiday = #{holiday},</if>",
-            "<if test='isWork != null'> is_work = #{isWork},</if>",
-            "<if test='isHoliday != null'> is_holiday = #{isHoliday},</if>",
-            "<if test='isWeek != null'> is_week = #{isWeek},</if>",
-        "</set>",
-        "WHERE holiday = #{holiday}",
-    "</script>"})
+    @Update({
+        "<script>",
+            "UPDATE holiday",
+            "<set>",
+                "<if test='holiday != null'> holiday = #{holiday},</if>",
+                "<if test='isWork != null'> is_work = #{isWork},</if>",
+                "<if test='isHoliday != null'> is_holiday = #{isHoliday},</if>",
+                "<if test='isWeek != null'> is_week = #{isWeek}</if>",
+            "</set>",
+            "WHERE holiday = #{holiday}",
+        "</script>"
+    })
     int updateHoliday(Holiday holiday);
 
 

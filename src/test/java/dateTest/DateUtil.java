@@ -41,7 +41,7 @@ public class DateUtil {
     @Test
     public void getStatus() {
         int[] total = new int[30];
-        List<String> holidayList = holidayMapper.getHolidayByMonth("2018-11");
+        List<String> holidayList = holidayMapper.getHolidayByMonth("2018-11",1);
         for (String holiday : holidayList) {
             String day = holiday.substring(8,10);
             int index = 0;

@@ -25,7 +25,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentMapper departmentMapper;
 
     @Override
-    public Department getWorkingHour(String SSN) {
+    public Department getDepartmentBySSN(String SSN) {
         Department department = null;
         try {
             WxCpService wxCpService = WxCpConfiguration.getCpServices().get(1000002);

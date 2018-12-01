@@ -50,7 +50,7 @@ public class CheckInOutServiceImpl implements CheckInOutService {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         //当天日期
         int today = calendar.get(Calendar.DATE);
-        Department department = departmentService.getWorkingHour(SSN);
+        Department department = departmentService.getDepartmentBySSN(SSN);
         List<CheckInOut> minCheckInOutList = checkInOutMapper.getMinChecktimeBySSN(SSN,time);
         List<CheckInOut> maxCheckInOutList = checkInOutMapper.getMaxChecktimeBySSN(SSN,time);
         List<CheckTime> checkTimeList = new ArrayList<CheckTime>();
@@ -135,9 +135,17 @@ public class CheckInOutServiceImpl implements CheckInOutService {
             total[i] = total[i] + 1;
         }
         //获取当月假期
-        List<String> holidayList = holidayMapper.getHolidayByMonth(yearMomth);
+        Department department = departmentService.getDepartmentBySSN(SSN);
+        List<String> holidayList = null;
+        //如果是电商部门另做处理
+        if (department.getId() == 700187005) {
+            holidayList = holidayMapper.getHolidayByMonth(yearMomth,1);
+        } else {
+            holidayList = holidayMapper.getHolidayByMonth(yearMomth,0);
+        }
         for (String holiday : holidayList) {
             String day = holiday.substring(8,10);
+            //当日之后的假期不做处理
             if (Integer.valueOf(day)<=today){
                 int index = 0;
                 if (day.charAt(0)=='0'){

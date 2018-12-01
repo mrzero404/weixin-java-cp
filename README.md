@@ -25,7 +25,7 @@ wechat:
         aesKey: 111
 ```
 3. 运行Java程序：`WxCpDemoApplication`；
-cd E:\Code\GitHub\weixin-java-cp-demo\ngrok
+cd E:\Code\GitHub\weixin-cp\ngrok
 ngrok -config ngrok.cfg -subdomain mrzero 8080
 4. 打开shell或cmd，进入ngrok目录，运行 `` 如果运行失败，请更换my-domain为其它字符串，直至连接成功；
 5. 配置企业微信对应应用中的“接受消息”部分的“接收消息服务器配置”URL地址：http://my-domain.tunnel.qydev.com/wx/cp/portal/xxxxx （xxxx要跟AgentId保持一致，注意my-domain要跟上面的一致，需要符合微信官方的要求）；
