@@ -1,20 +1,16 @@
 package wxCPService;
 
-import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
-import com.github.binarywang.demo.wx.cp.config.WxCpConfiguration;
-import com.github.binarywang.demo.wx.cp.constant.Status;
-import com.github.binarywang.demo.wx.cp.dao.DepartmentMapper;
-import com.github.binarywang.demo.wx.cp.entity.Department;
-import com.github.binarywang.demo.wx.cp.service.CheckInOutService;
-import com.github.binarywang.demo.wx.cp.utils.TimeHandle;
+import cn.com.lunaler.wx.cp.WxCpDemoApplication;
+import cn.com.lunaler.wx.cp.config.WxCpConfiguration;
+import cn.com.lunaler.wx.cp.dao.DepartmentMapper;
+import cn.com.lunaler.wx.cp.entity.Department;
+import cn.com.lunaler.wx.cp.service.CheckInOutService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpDepartmentService;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.api.impl.WxCpDepartmentServiceImpl;
 import me.chanjar.weixin.cp.bean.WxCpDepart;
 import me.chanjar.weixin.cp.bean.WxCpMessage;
 import me.chanjar.weixin.cp.bean.WxCpUser;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

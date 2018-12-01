@@ -1,17 +1,14 @@
 package Department;
 
-import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
-import com.github.binarywang.demo.wx.cp.dao.CheckInOutMapper;
-import com.github.binarywang.demo.wx.cp.dao.DepartmentMapper;
-import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
-import com.github.binarywang.demo.wx.cp.entity.Department;
+import cn.com.lunaler.wx.cp.WxCpDemoApplication;
+import cn.com.lunaler.wx.cp.dao.DepartmentMapper;
+import cn.com.lunaler.wx.cp.entity.Department;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author LinWeiYu

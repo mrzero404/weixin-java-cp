@@ -1,9 +1,9 @@
 package checkInOutTest;
 
-import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
-import com.github.binarywang.demo.wx.cp.constant.Status;
-import com.github.binarywang.demo.wx.cp.service.CheckInOutService;
-import com.github.binarywang.demo.wx.cp.utils.TimeHandle;
+import cn.com.lunaler.wx.cp.WxCpDemoApplication;
+import cn.com.lunaler.wx.cp.constant.Status;
+import cn.com.lunaler.wx.cp.service.CheckInOutService;
+import cn.com.lunaler.wx.cp.utils.TimeHandle;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,10 +1,8 @@
 package checkInOutTest;
 
-import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
-import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
-import com.github.binarywang.demo.wx.cp.entity.CheckTime;
-import com.github.binarywang.demo.wx.cp.service.CheckInOutService;
-import org.junit.Assert;
+import cn.com.lunaler.wx.cp.WxCpDemoApplication;
+import cn.com.lunaler.wx.cp.entity.CheckTime;
+import cn.com.lunaler.wx.cp.service.CheckInOutService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

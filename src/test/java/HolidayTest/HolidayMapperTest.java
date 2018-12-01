@@ -1,10 +1,8 @@
 package HolidayTest;
 
-import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
-import com.github.binarywang.demo.wx.cp.dao.CheckInOutMapper;
-import com.github.binarywang.demo.wx.cp.dao.HolidayMapper;
-import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
-import com.github.binarywang.demo.wx.cp.entity.Holiday;
+import cn.com.lunaler.wx.cp.WxCpDemoApplication;
+import cn.com.lunaler.wx.cp.dao.HolidayMapper;
+import cn.com.lunaler.wx.cp.entity.Holiday;
 import dateTest.DateTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;

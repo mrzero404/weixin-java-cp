@@ -1,9 +1,9 @@
 package dateTest;
 
-import com.github.binarywang.demo.wx.cp.WxCpDemoApplication;
-import com.github.binarywang.demo.wx.cp.dao.CheckInOutMapper;
-import com.github.binarywang.demo.wx.cp.dao.HolidayMapper;
-import com.github.binarywang.demo.wx.cp.entity.CheckInOut;
+import cn.com.lunaler.wx.cp.WxCpDemoApplication;
+import cn.com.lunaler.wx.cp.dao.CheckInOutMapper;
+import cn.com.lunaler.wx.cp.dao.HolidayMapper;
+import cn.com.lunaler.wx.cp.entity.CheckInOut;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

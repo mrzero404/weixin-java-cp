@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.github.binarywang.demo.wx.cp.WxCpDemoApplication
+Main-Class: cn.com.lunaler.wx.cp.WxCpDemoApplication
 
