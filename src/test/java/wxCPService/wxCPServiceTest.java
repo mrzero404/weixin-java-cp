@@ -2,6 +2,7 @@ package wxCPService;
 
 import cn.com.lunaler.wx.cp.WxCpDemoApplication;
 import cn.com.lunaler.wx.cp.config.WxCpConfiguration;
+import cn.com.lunaler.wx.cp.dao.CheckInOutMapper;
 import cn.com.lunaler.wx.cp.dao.DepartmentMapper;
 import cn.com.lunaler.wx.cp.entity.Department;
 import cn.com.lunaler.wx.cp.service.CheckInOutService;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +35,8 @@ public class wxCPServiceTest {
     @Resource
     private DepartmentMapper departmentMapper;
 
+    @Resource
+    private CheckInOutMapper checkInOutMapper;
 
     //递归获取部门上下班时间
     @Test
@@ -81,6 +85,36 @@ public class wxCPServiceTest {
             wxCpService.messageSend(wxCpMessage);
         } catch (WxErrorException e) {
             e.printStackTrace();
+        }
+    }
+
+    //获取部门下用户700187114
+    @Test
+    public void listByDepartment() throws WxErrorException {
+        WxCpService wxCpServiceMessage = WxCpConfiguration.getCpServices().get(1000004);
+        WxCpService wxCpService = WxCpConfiguration.getCpServices().get(3010011);
+        String[] departments = {"700187114","700187131","700187103","700187085","700187092","700187117","700187128"
+            ,"700187124"
+            ,"700187106"
+            ,"700187112"};
+        List<WxCpUser> users = new ArrayList<WxCpUser>();
+        for (String department : departments) {
+            users.addAll(wxCpService.getUserService().listByDepartment(Integer.valueOf(department), true, 0));
+        }
+        List<String> SSNList = checkInOutMapper.getSSNByDay("2018-11-17");
+        for (WxCpUser wxCpUser : users) {
+            for (String SSN : SSNList) {
+                if (wxCpUser.getMobile().contentEquals(SSN)) {
+                    wxCpUser.setStatus(0);
+                }
+            }
+        }
+        for (WxCpUser wxCpUser : users) {
+            if (wxCpUser.getStatus() ==0 ){
+                System.out.println(wxCpUser.getName()+" : " +wxCpUser.getMobile()+"  status : "+ wxCpUser.getStatus() + "  userId : " + wxCpUser.getUserId());
+//                wxCpServiceMessage.messageSend(WxCpMessage.TEXT().agentId(1000004).toUser(wxCpUser.getUserId()).content("8：30上班打卡").build());
+                wxCpServiceMessage.messageSend(WxCpMessage.TEXTCARD().agentId(1000004).toUser(wxCpUser.getUserId()).title("打卡提醒").description("8：30上班打卡").url("URL").build());
+            }
         }
     }
 }

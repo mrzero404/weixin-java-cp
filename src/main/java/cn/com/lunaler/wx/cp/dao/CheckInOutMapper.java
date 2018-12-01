@@ -82,4 +82,23 @@ public interface CheckInOutMapper {
         "GROUP BY\n" +
         "dbo.CHECKINOUT.USERID")
     List<CheckInOut> getMinChecktimeByDate(String time);
+
+    /**
+     * 获取一天中的有打卡数据的用户电话号码
+     * @param day
+     * @return
+     */
+    @Select(
+        "SELECT\n" +
+        "USERINFO.SSN\n" +
+        "FROM\n" +
+        "CHECKINOUT, USERINFO\n" +
+        "WHERE\n" +
+        "CHECKINOUT.USERID = USERINFO.USERID\n" +
+        "AND\n" +
+        "CONVERT(VARCHAR(25), CHECKTIME, 126) LIKE CONCAT(#{day}, '%')\n" +
+        "GROUP BY\n" +
+        "USERINFO.SSN"
+    )
+    List<String> getSSNByDay(String day);
 }

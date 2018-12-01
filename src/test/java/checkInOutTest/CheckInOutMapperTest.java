@@ -58,4 +58,16 @@ public class CheckInOutMapperTest {
             System.out.println(checkInOut.getDatatime());
         }
     }
+
+    /**
+     * 获取一天中的有打卡数据的用户电话号码
+     */
+    @Test
+    public void getSSNByDay() {
+        List<String> SSNList = checkInOutMapper.getSSNByDay("2018-11-17");
+        for (String SSN : SSNList) {
+            System.out.println(SSN);
+        }
+
+    }
 }
