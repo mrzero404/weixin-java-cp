@@ -2,6 +2,7 @@ package com.github.binarywang.demo.wx.cp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author LinWeiYu
@@ -9,6 +10,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Holiday {
 
     /**
@@ -25,5 +27,15 @@ public class Holiday {
      * 是否需要工作
      */
     private int isWork;
+
+    /**
+     * 是否是节假日
+     */
+    private int isHoliday;
+
+    /**
+     * 是否是大小周
+     */
+    private int isWeek;
 
 }
