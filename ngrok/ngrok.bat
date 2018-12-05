@@ -1,0 +1,1 @@
+E:/Code/GitHub/weixin-cp/ngrok/ngrok.exe -log=ngrok.log -config=ngrok.cfg -subdomain=mrzero 8080

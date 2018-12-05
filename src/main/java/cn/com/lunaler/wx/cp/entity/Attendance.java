@@ -30,6 +30,11 @@ public class Attendance {
     private String idNumber;
 
     /**
+     * 电话号码
+     */
+    private String SSN;
+
+    /**
      * 日期
      */
     private String date;
