@@ -3,6 +3,7 @@ package cn.com.lunaler.wx.cp.controller;
 import cn.com.lunaler.wx.cp.config.WxCpConfiguration;
 import cn.com.lunaler.wx.cp.dao.UserMapper;
 import cn.com.lunaler.wx.cp.entity.Staff;
+import cn.com.lunaler.wx.cp.entity.User;
 import cn.com.lunaler.wx.cp.service.CheckInOutService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpDepartmentService;
@@ -13,17 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
@@ -40,10 +36,15 @@ public class CountController {
 
     private Map<String,String> userMap = new HashMap<String, String>();
 
-    @RequestMapping("/getDailyCount")
-    public Object getCode(HttpServletRequest request, HttpServletResponse response) {
+    @PostMapping("/getDailyCount")
+    @ResponseBody
+    public Object getDailyCount(@RequestBody List<Staff> staffList, @RequestParam(value = "dates")List<String> dates) {
+        Map<String,Object> result = new HashMap<String, Object>();
+        result.put("msg",10000);
+        result.put("dates",dates);
+        result.put("staffList",staffList);
 
-        return "calendar";
+        return new ResponseEntity<Map<String, Object>>(result,HttpStatus.OK);
     }
 
     @RequestMapping("/getStaffs")
@@ -104,6 +105,12 @@ public class CountController {
             }
         }
         return staffList;
+    }
+
+    @RequestMapping("/getStaffJson")
+    public Object getStaffJson(){
+        Map<String,Object> result = new HashMap<String,Object>();
+        return new ResponseEntity<Map<String, Object>>(result,HttpStatus.OK);
     }
 
 

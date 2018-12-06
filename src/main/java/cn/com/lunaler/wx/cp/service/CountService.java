@@ -2,6 +2,7 @@ package cn.com.lunaler.wx.cp.service;
 
 import cn.com.lunaler.wx.cp.entity.Attendance;
 import cn.com.lunaler.wx.cp.entity.Department;
+import cn.com.lunaler.wx.cp.entity.Staff;
 
 import java.util.List;
 
@@ -13,10 +14,11 @@ public interface CountService {
 
     /**
      * 获取每日统计信息
-     * @param attendanceList
+     * @param staffList
+     * @param dates
      * @return
      */
-    List<Attendance> getDailyCount(List<Attendance> attendanceList);
+    List<Attendance> getDailyCount(List<Staff> staffList, List<String> dates);
 
     /**
      * 获取总部人员信息

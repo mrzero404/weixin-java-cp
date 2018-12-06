@@ -3,6 +3,7 @@ package cn.com.lunaler.wx.cp.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
+@NoArgsConstructor
 public class Staff {
 
     private long id ;

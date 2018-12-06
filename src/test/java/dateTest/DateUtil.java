@@ -101,8 +101,15 @@ public class DateUtil {
 
     }
 
+    /**
+     * 根据两个日期，给出两个日期间的日期数组
+     * @throws ParseException
+     */
     @Test
     public void format() throws ParseException {
+        String startDate = "Thu Dec 06 2018 00:00:00 GMT 0800 (中国标准时间)";
+        String endDate = "Thu Dec 06 2018 00:00:00 GMT 0800 (中国标准时间)";
+        Date date = new Date(startDate);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");//设置日期格式
         System.out.println("时间："+df.format(new Date()).substring(0,10));// new Date()为获取当前系统时间
     }
