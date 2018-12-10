@@ -3,12 +3,14 @@ package checkInOutTest;
 import cn.com.lunaler.wx.cp.WxCpDemoApplication;
 import cn.com.lunaler.wx.cp.dao.CheckInOutMapper;
 import cn.com.lunaler.wx.cp.entity.CheckInOut;
+import cn.com.lunaler.wx.cp.utils.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,6 +70,24 @@ public class CheckInOutMapperTest {
         for (String SSN : SSNList) {
             System.out.println(SSN);
         }
+    }
 
+    /**
+     * 获取单个用户包含日期中的每天的最【小/大】打卡时间
+     */
+    @Test
+    public void getMinChecktimeInDate() {
+        List<String> dates = new ArrayList<>();
+        dates.add("2018/08/02");
+        dates.add("2018/10/02");
+        List<String> dateList = DateUtil.getBetweenDates(dates);
+        List<CheckInOut> checkInOutList = checkInOutMapper.getMinChecktimeInDate("13143385664",dateList);
+        for (CheckInOut checkInOut : checkInOutList) {
+            System.out.println(checkInOut.getDatatime());
+        }
+        List<CheckInOut> maxCheckInOutList = checkInOutMapper.getMaxChecktimeInDate("13143385664",dateList);
+        for (CheckInOut checkInOut : maxCheckInOutList) {
+            System.out.println(checkInOut.getDatatime());
+        }
     }
 }

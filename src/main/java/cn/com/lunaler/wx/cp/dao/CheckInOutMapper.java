@@ -11,9 +11,61 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CheckInOutMapper {
+    /**
+     * 获取单个用户包含日期中的每天的最【小】打卡时间
+     * @param SSN
+     * @param dateList
+     * @return
+     */
+    @Select({
+        "<script>",
+        "SELECT\n" +
+            "MIN(dbo.CHECKINOUT.CHECKTIME)as datatime\n" +
+            "FROM\n" +
+                "dbo.USERINFO ,\n" +
+                "dbo.CHECKINOUT\n" +
+            "WHERE\n" +
+                "dbo.USERINFO.USERID = dbo.CHECKINOUT.USERID AND\n" +
+                "dbo.USERINFO.SSN = #{SSN} AND\n" +
+                "CONVERT(VARCHAR(25), CHECKTIME, 111) IN " +
+                "<foreach item='item' index='index' collection='dateList' open='(' separator=',' close=')'>" +
+                    "#{item}"+
+                "</foreach>",
+            "GROUP BY\n" +
+            "CONVERT(VARCHAR(10), CHECKTIME, 120)",
+        "</script>"
+    })
+    List<CheckInOut> getMinChecktimeInDate(@Param("SSN") String SSN,@Param("dateList" )List<String> dateList);
 
     /**
-     * 获取单个用户一个月中的每天的最小打卡时间
+     * 获取单个用户包含日期中的每天的最【大】打卡时间
+     * @param SSN
+     * @param dateList
+     * @return
+     */
+    @Select({
+        "<script>",
+        "SELECT\n" +
+            "MAX(dbo.CHECKINOUT.CHECKTIME)as datatime\n" +
+            "FROM\n" +
+            "dbo.USERINFO ,\n" +
+            "dbo.CHECKINOUT\n" +
+            "WHERE\n" +
+            "dbo.USERINFO.USERID = dbo.CHECKINOUT.USERID AND\n" +
+            "dbo.USERINFO.SSN = #{SSN} AND\n" +
+            "CONVERT(VARCHAR(25), CHECKTIME, 111) IN " +
+            "<foreach item='item' index='index' collection='dateList' open='(' separator=',' close=')'>" +
+            "#{item}"+
+            "</foreach>",
+        "GROUP BY\n" +
+            "CONVERT(VARCHAR(10), CHECKTIME, 120)",
+        "</script>"
+    })
+    List<CheckInOut> getMaxChecktimeInDate(@Param("SSN") String SSN,@Param("dateList" )List<String> dateList);
+
+
+    /**
+     * 获取单个用户一个月中的每天的最【小】打卡时间
      * @param SSN
      * @param time
      * @return
@@ -101,4 +153,6 @@ public interface CheckInOutMapper {
         "USERINFO.SSN"
     )
     List<String> getSSNByDay(String day);
+
+
 }

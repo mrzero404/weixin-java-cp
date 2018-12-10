@@ -108,8 +108,8 @@ public class CheckInOutServiceImpl implements CheckInOutService {
 
     /**
      * 获取一个月中的异常状态
-     * @param SSN
-     * @param yearMomth
+     * @param SSN 电话号码
+     * @param yearMomth 年月
      * @return
      */
     public List<CheckTime> getUnusual(String SSN, String yearMomth) {

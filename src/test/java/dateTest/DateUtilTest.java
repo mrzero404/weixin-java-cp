@@ -4,6 +4,8 @@ import cn.com.lunaler.wx.cp.WxCpDemoApplication;
 import cn.com.lunaler.wx.cp.dao.CheckInOutMapper;
 import cn.com.lunaler.wx.cp.dao.HolidayMapper;
 import cn.com.lunaler.wx.cp.entity.CheckInOut;
+import cn.com.lunaler.wx.cp.utils.DateUtil;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -14,9 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author LinWeiYu
@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WxCpDemoApplication.class)
-public class DateUtil {
+public class DateUtilTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -107,11 +107,16 @@ public class DateUtil {
      */
     @Test
     public void format() throws ParseException {
-        String startDate = "Thu Dec 06 2018 00:00:00 GMT 0800 (中国标准时间)";
-        String endDate = "Thu Dec 06 2018 00:00:00 GMT 0800 (中国标准时间)";
-        Date date = new Date(startDate);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");//设置日期格式
-        System.out.println("时间："+df.format(new Date()).substring(0,10));// new Date()为获取当前系统时间
+        List<String> dates = new ArrayList<String>();
+        dates.add("2018/08/02");
+        dates.add("2018/10/02");
+        dates = DateUtil.getBetweenDates(dates);
+        for (String date : dates) {
+            System.out.println(date);
+        }
+
     }
+
+
 
 }

@@ -66,16 +66,6 @@ public class wxCPServiceTest {
         }
     }
 
-    //部门信息测试
-    @Test
-    public void department() {
-        WxCpService wxCpService = WxCpConfiguration.getCpServices().get(3010011);
-        try {
-            System.out.println(wxCpService.post("https://qyapi.weixin.qq.com/cgi-bin/checkin/getcheckinoption","13143385664"));
-        } catch (WxErrorException e) {
-            e.printStackTrace();
-        }
-    }
 
     //消息推送测试
     @Test
