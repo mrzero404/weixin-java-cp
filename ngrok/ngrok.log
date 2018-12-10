@@ -1,102 +1,11 @@
-[2018/12/10 10:41:33 CST] [INFO] (ngrok/log.Info:112) Reading configuration file ngrok.cfg
-[2018/12/10 10:41:33 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
-[2018/12/10 10:41:33 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [view] [web] Serving web interface on 127.0.0.1:4040
-[2018/12/10 10:41:33 CST] [INFO] (ngrok/log.Info:112) Checking for update
-[2018/12/10 10:41:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:41:33 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [view] [term] Resize event, redrawing
-[2018/12/10 10:41:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:41:34 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:41:34 CST] [INFO] (ngrok/log.Info:112) Waiting 1 seconds before reconnecting
-[2018/12/10 10:41:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:41:36 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:41:36 CST] [INFO] (ngrok/log.Info:112) Waiting 2 seconds before reconnecting
-[2018/12/10 10:41:36 CST] [INFO] (ngrok/log.Info:112) No update available
-[2018/12/10 10:41:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:41:39 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:41:39 CST] [INFO] (ngrok/log.Info:112) Waiting 4 seconds before reconnecting
-[2018/12/10 10:41:43 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:41:44 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:41:44 CST] [INFO] (ngrok/log.Info:112) Waiting 8 seconds before reconnecting
-[2018/12/10 10:41:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:41:53 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:41:53 CST] [INFO] (ngrok/log.Info:112) Waiting 16 seconds before reconnecting
-[2018/12/10 10:42:09 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:42:10 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:42:10 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:42:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:42:41 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:42:41 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:43:11 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:43:12 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:43:12 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:43:42 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:43:44 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:43:44 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:44:14 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:44:15 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:44:15 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:44:45 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:44:46 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:44:46 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:45:16 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:45:17 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:45:17 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:45:47 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:45:48 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:45:48 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:46:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:46:19 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:46:19 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:46:49 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:46:50 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:46:50 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:47:20 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:47:21 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:47:21 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:47:51 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:47:52 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:47:52 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:48:22 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:48:23 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:48:23 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:48:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:48:54 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:48:54 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:49:24 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:49:31 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:49:31 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:50:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:50:02 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:50:02 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:50:32 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:50:33 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:50:33 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:51:03 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:51:04 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:51:04 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:51:34 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:51:35 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:51:35 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:52:05 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:52:07 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:52:07 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:52:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:52:38 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:52:38 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:53:08 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:53:09 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:53:09 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:53:39 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:53:40 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:53:40 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:54:10 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:54:11 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:54:11 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:54:41 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:54:42 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:54:42 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:55:12 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
-[2018/12/10 10:55:13 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
-[2018/12/10 10:55:13 CST] [INFO] (ngrok/log.Info:112) Waiting 30 seconds before reconnecting
-[2018/12/10 10:55:17 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [view] [term] Resize event, redrawing
-[2018/12/10 10:55:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
+[2018/12/10 14:15:29 CST] [INFO] (ngrok/log.Info:112) Reading configuration file ngrok.cfg
+[2018/12/10 14:15:29 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
+[2018/12/10 14:15:29 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [view] [web] Serving web interface on 127.0.0.1:4040
+[2018/12/10 14:15:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
+[2018/12/10 14:15:29 CST] [INFO] (ngrok/log.Info:112) Checking for update
+[2018/12/10 14:15:29 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:83) [view] [term] Resize event, redrawing
+[2018/12/10 14:15:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update
+[2018/12/10 14:15:30 CST] [INFO] (ngrok/log.Info:112) No update available
+[2018/12/10 14:15:31 CST] [EROR] (ngrok/log.Error:120) control recovering from failure dial tcp 47.97.10.127:4443: connectex: No connection could be made because the target machine actively refused it.
+[2018/12/10 14:15:31 CST] [INFO] (ngrok/log.Info:112) Waiting 1 seconds before reconnecting
+[2018/12/10 14:15:32 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:79) [view] [term] Waiting for update

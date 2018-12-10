@@ -23,4 +23,12 @@ public class Staff {
     private String label;
 
     private List<Staff> children;
+
+    private Integer departmentId;
+
+    public Staff(long id, String label, List children){
+        this.id = id;
+        this.label = label;
+        this.children = children;
+    }
 }

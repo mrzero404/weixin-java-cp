@@ -29,4 +29,38 @@ public enum Status {
     public void setStatus(int status) {
         this.status = status;
     }
+
+
+    public String toString() {
+        String statusStr = "";
+        switch (status) {
+            case 0 :
+                statusStr = "全勤";
+                break;
+            case 1 :
+                statusStr = "正常";
+                break;
+            case 2 :
+                statusStr = "迟到";
+                break;
+            case 3 :
+                statusStr = "迟到";
+                break;
+            case 4 :
+                statusStr = "旷工";
+                break;
+            case 5 :
+                statusStr = "早退";
+                break;
+            case 6 :
+                statusStr = "全勤";
+                break;
+            case 7 :
+                statusStr = "全勤";
+                break;
+
+
+        }
+        return statusStr;
+    }
 }

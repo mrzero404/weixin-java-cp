@@ -1,11 +1,13 @@
 package cn.com.lunaler.wx.cp.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author LinWeiYu
  * @date 2018/11/20 16:40
  */
+@NoArgsConstructor
 @Data
 public class Attendance {
 
@@ -84,7 +86,7 @@ public class Attendance {
     /**
      * 迟到分钟数
      */
-    private String minutesLate;
+    private Integer minutesLate;
 
     /**
      * 迟到赞助
@@ -135,6 +137,11 @@ public class Attendance {
      * 丧假
      */
     private String funeralLeave;
+
+    public Attendance(int id, String department){
+        this.id = id;
+        this.department = department;
+    }
 
 
 }

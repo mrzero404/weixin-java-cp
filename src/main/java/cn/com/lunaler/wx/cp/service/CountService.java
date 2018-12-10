@@ -5,6 +5,7 @@ import cn.com.lunaler.wx.cp.entity.Department;
 import cn.com.lunaler.wx.cp.entity.Staff;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author LinWeiYu
@@ -14,11 +15,11 @@ public interface CountService {
 
     /**
      * 获取每日统计信息
-     * @param staffList
+     * @param classfiyStaffMap
      * @param dates
      * @return
      */
-    List<Attendance> getDailyCount(List<Staff> staffList, List<String> dates);
+    List<Attendance> getDailyCount(Map<Integer, List<Staff>> classfiyStaffMap, List<String> dates);
 
     /**
      * 获取总部人员信息

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface DepartmentMapper {
 
     @Select("SELECT\n" +
+        "DEPTNAME,"+
         "dbo.department.workingHour,\n" +
         "dbo.department.offWorkingHours\n" +
         "FROM\n" +
